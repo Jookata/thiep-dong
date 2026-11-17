@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WinkCard · Noel</title>
+<meta name="description" content="Một tấm thiệp Noel động dành cho bạn. Chạm để mở! / An animated Christmas card for you. Tap to open!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WinkCard: bạn có một tấm thiệp Noel 💌">
+<meta property="og:description" content="Chạm để mở thiệp và khám phá đêm Noel trong rừng.">
+<meta property="og:image" content="https://jookata.github.io/thiep-dong/noel/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#04070d;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#fff}
+body{display:flex;align-items:center;justify-content:center}
+.stage{--w:min(100vw,calc(100vh*.5625));width:var(--w);height:calc(var(--w)*1.7778);position:relative;container-type:size;overflow:hidden;background:#15181f;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+@supports (height:100dvh){.stage{--w:min(100vw,calc(100dvh*.5625))}}
+svg#scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* ---- scene states ---- */
+#litImg{opacity:0;transition:opacity 2.4s ease-in}
+.lit #litImg{opacity:1}
+#smokeG{opacity:0;transition:opacity 2.6s ease-out}
+#smokeG.on{opacity:1}
+#tree{transform:scale(.17);transform-origin:266px 530px;transform-box:view-box}
+.twk{transform-box:fill-box;transform-origin:center;animation:starp 2.4s ease-in-out infinite}
+@keyframes starp{0%,100%{transform:scale(.93)}50%{transform:scale(1.08)}}
+.light{transform-box:fill-box;transform-origin:center;opacity:0}
+#lights.blink .light{animation:lightb 1.2s ease-in-out infinite}
+@keyframes lightb{0%,100%{opacity:1;transform:scale(1.15)}50%{opacity:.18;transform:scale(.65)}}
+#stars circle{opacity:.55}
+#stars.tw circle{animation:tw 2.6s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:1}50%{opacity:.15}}
+.glow{animation:glowp 1.8s ease-in-out infinite}
+@keyframes glowp{0%,100%{opacity:.9}50%{opacity:.4}}
+#snow{opacity:0;transition:opacity 1.6s}
+#snow.on{opacity:1}
+#snow circle{animation:fall linear infinite}
+@keyframes fall{to{transform:translate(var(--dx,0),690px)}}
+#dogG{opacity:0}
+#dogG>image{visibility:hidden}
+#dogSit{opacity:0}
+#arrow{opacity:0;transition:opacity .3s;pointer-events:none}
+.abob{animation:bob .85s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(-5px);opacity:1}50%{transform:translateY(5px);opacity:.4}}
+#hot *{fill:transparent;pointer-events:none}
+#hot .on{pointer-events:all}
+
+/* ---- overlays ---- */
+#msg{position:absolute;left:4cqw;right:4cqw;bottom:3cqw;padding:3cqw 4cqw;background:none;border:0;text-shadow:0 0 3px #000,0 1px 2px #000,0 0 9px #000,0 0 18px rgba(0,0,0,.85);font-weight:600;font-size:4.3cqw;line-height:1.4;text-align:center;opacity:0;transition:opacity .4s;z-index:5;pointer-events:none}
+#msg #msgMsg,#msg #msgSign,#msg #replay,#msg #msgDl{display:none}
+#msg.final{pointer-events:auto;top:13cqw;bottom:auto;background:none}
+#msg.final #msgText{font-size:6cqw;font-weight:700;color:#ffe9a8;letter-spacing:.2px}
+#msg.final #msgMsg{display:block;margin-top:1.5cqw;font-size:3.8cqw}
+#msg.final #msgSign{display:block;margin-top:1.5cqw;font-size:3.6cqw;color:#cfd8ee}
+#msg.final #msgDl{display:block;margin-top:3cqw;font-size:3.3cqw;font-weight:500;color:#e8eefc}
+#msgDl a{color:#9fd0ff;word-break:break-all;unicode-bidi:isolate}
+#msg.final #replay{display:inline-block;margin-top:2.5cqw}
+#toast{position:absolute;top:12cqw;left:50%;transform:translateX(-50%);padding:2cqw 5cqw;background:none;border:0;text-shadow:0 0 3px #000,0 1px 2px #000,0 0 9px #000,0 0 18px rgba(0,0,0,.85);font-weight:700;font-size:4.6cqw;opacity:0;transition:opacity .25s;z-index:7;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+button{font:inherit;color:#fff;cursor:pointer}
+#replay,.big{border:0;border-radius:99px;background:#d33f3f;padding:2.2cqw 6cqw;font-size:3.9cqw;font-weight:600}
+#snd{position:absolute;top:2.5cqw;right:2.5cqw;width:9cqw;height:9cqw;border-radius:50%;border:0;background:rgba(255,255,255,.14);font-size:4.6cqw;z-index:6;display:none}
+#start{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:rgba(4,8,18,.7);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);transition:opacity .6s}
+#start.hide{opacity:0;pointer-events:none}
+#start .card{width:84cqw;text-align:center;padding:7cqw 6cqw;border-radius:5cqw;background:rgba(18,28,52,.92);border:1px solid rgba(255,255,255,.14)}
+#start .env{font-size:12cqw;line-height:1}
+#start h1{font-size:5.6cqw;margin:3cqw 0 2cqw;color:#ffe9a8}
+#start p{font-size:4.2cqw;color:#d6def2;margin-bottom:1.2cqw}
+#demo{margin:3cqw 0}
+#demo label{display:block;text-align:left;font-size:3.4cqw;color:#aab6d3;margin-top:2cqw}
+#demo input{width:100%;margin-top:1cqw;padding:2.2cqw 3cqw;border-radius:2.5cqw;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:4cqw;outline:none}
+#demo .note{font-size:3.2cqw;color:#8a97b8;margin-bottom:1cqw}
+.langs{display:flex;gap:2cqw;margin-top:3cqw;justify-content:center}
+.langs select{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:1.6cqw 4cqw;font-size:3.6cqw;max-width:100%}
+.langs select option{color:#102040}
+.langs button{border:1px solid rgba(255,255,255,.25);background:transparent;border-radius:99px;padding:1.4cqw 4cqw;font-size:3.5cqw}
+.langs button.active{background:#fff;color:#102040}
+#start .big{margin-top:3cqw}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+<svg id="scene" viewBox="0 0 360 640" xmlns="http://www.w3.org/2000/svg" aria-label="Thiệp Noel">
+<defs>
+<radialGradient id="puffG"><stop offset="0" stop-color="#dfe5f0" stop-opacity=".8"/><stop offset=".55" stop-color="#cdd5e4" stop-opacity=".45"/><stop offset="1" stop-color="#cdd5e4" stop-opacity="0"/></radialGradient>
+  <radialGradient id="starGlow"><stop offset="0" stop-color="#fff7c2" stop-opacity=".95"/><stop offset="1" stop-color="#fff7c2" stop-opacity="0"/></radialGradient>
+</defs>
+
+<image href="assets/night.webp" x="0" y="0" width="360" height="640" preserveAspectRatio="xMidYMid slice"/>
+<image id="litImg" href="assets/lit.webp" x="0" y="0" width="360" height="640" preserveAspectRatio="xMidYMid slice"/>
+<g id="smokeG"></g>
+<g id="stars"></g>
+
+<g id="tree">
+  <image href="assets/tree.webp" x="171" y="244.3" width="190" height="285.7"/>
+  <g id="lights"></g>
+</g>
+
+<g id="bigStar" style="transform:translate(255px,110px)">
+  <defs>
+    <radialGradient id="rayG" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"><stop offset="0" stop-color="#ffffff"/><stop offset=".32" stop-color="#fff3a8"/><stop offset=".7" stop-color="#ffd54a" stop-opacity=".75"/><stop offset="1" stop-color="#ffb300" stop-opacity=".1"/></radialGradient>
+    <radialGradient id="starGlow2"><stop offset="0" stop-color="#fff6c2" stop-opacity=".85"/><stop offset=".3" stop-color="#ffe27a" stop-opacity=".4"/><stop offset="1" stop-color="#ffd54a" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle class="glow" r="36" fill="url(#starGlow2)"/>
+  <g class="twk"><g id="rays" fill="url(#rayG)"></g></g>
+  <circle r="4.2" fill="#fffdf0"/>
+  <circle r="2.4" fill="#fff"/>
+</g>
+
+<g id="spray"></g>
+
+<!-- Chó: 3 dáng chạy (cắt từ ảnh gốc) + dáng ngồi. Gốc toạ độ = giữa-đáy chân. -->
+<g id="dogG" style="transform:translate(54px,522px)">
+  <image id="dog2" href="assets/dog2.webp" x="-19.95" y="-34.7" width="39.9" height="34.7"/>
+  <image id="dog3" href="assets/dog3.webp" x="-23.1" y="-35.8" width="46.2" height="35.8"/>
+  <g id="dogSit" style="visibility:hidden" transform="translate(-27.1 -56.3) scale(.134)">
+    <g transform="translate(90 372)"><g id="tailR"><image href="assets/dogsit_tail.webp" x="-90" y="-372" width="404" height="420"/></g></g>
+    <image href="assets/dogsit_body.webp" x="0" y="0" width="404" height="420"/>
+    <path id="neckBand" d="M272 108 Q318 134 362 98" stroke="#e02424" stroke-width="21" fill="none"/>
+    <path d="M274 103 Q318 128 360 93" stroke="#ff8a8a" stroke-width="3.5" fill="none" opacity=".7"/>
+  </g>
+</g>
+
+<!-- vòng cổ đỏ rơi xuống đất -->
+<g transform="translate(194 538)"><g id="collarA" style="opacity:0">
+  <ellipse rx="5.2" ry="2.4" fill="none" stroke="#b81e1e" stroke-width="2.5"/>
+  <ellipse rx="5.2" ry="2.4" fill="none" stroke="#e53a3a" stroke-width="1.6"/>
+  <circle cx="0" cy="2.6" r="1.2" fill="#ffd54a" stroke="#b8860b" stroke-width=".4"/>
+</g></g>
+<!-- mèo 1: thò đầu ra từ sau cành thông, lắc qua lắc lại -->
+<g transform="translate(262 504)"><g id="cat1P" style="opacity:0"><g id="cat1R"><image href="assets/cat1.webp" x="-8.5" y="-17.3" width="17" height="17.3"/></g></g></g>
+<!-- mảnh cành thông phía trước che mèo (cắt từ chính ảnh cây) -->
+<clipPath id="tfClip"><rect x="171" y="499.6" width="190" height="31"/></clipPath>
+<g id="treeFront" style="opacity:0" clip-path="url(#tfClip)"><image href="assets/tree.webp" x="171" y="244.3" width="190" height="285.7"/></g>
+<!-- mèo 2: nằm, tay khều vòng cổ -->
+<g transform="translate(196 511.7) scale(.0713)"><g id="cat2P" style="opacity:0">
+  <image href="assets/cat2_body.webp" x="0" y="0" width="617" height="397"/>
+  <g transform="translate(155.4 275.1)"><g id="armR"><image href="assets/cat2_arm.webp" x="-155.4" y="-275.1" width="617" height="397"/></g></g>
+</g></g>
+<g id="snow"></g>
+
+<g id="arrow"><g class="abob"><polygon points="-4,-34 4,-34 4,-15 12,-15 0,0 -12,-15 -4,-15" fill="#ffd54a" stroke="#8a5a00" stroke-width="1.5" stroke-linejoin="round"/></g></g>
+
+<g id="hot">
+  <rect data-h="door" x="144" y="384" width="48" height="86"/>
+  <rect data-h="wood" x="24" y="424" width="84" height="72"/>
+  <circle data-h="tree" cx="266" cy="495" r="46"/>
+  <circle data-h="spray" cx="54" cy="518" r="32"/>
+  <circle data-h="star" cx="255" cy="110" r="34"/>
+  <rect data-h="sky" x="0" y="0" width="360" height="320"/>
+</g>
+<g id="fx" pointer-events="none"></g>
+</svg>
+
+<button id="snd" aria-label="Âm thanh">🔊</button>
+<div id="toast"></div>
+
+<div id="msg">
+  <div id="msgText"></div>
+  <div id="msgMsg"></div>
+  <div id="msgSign"></div>
+  <div id="msgDl"><span id="dlT"></span> <a id="dlA" dir="ltr" target="_blank" rel="noopener"></a></div>
+  <button id="replay"></button>
+</div>
+
+<div id="start">
+  <div class="card">
+    <div class="env">💌</div>
+    <h1 id="stTitle"></h1>
+    <p id="stFrom"></p>
+    <p id="stTo"></p>
+    <div id="demo">
+      <div class="note" id="stNote"></div>
+      <label><span id="lblTo"></span><input id="inTo" maxlength="30" autocomplete="off"></label>
+      <label><span id="lblFrom"></span><input id="inFrom" maxlength="30" autocomplete="off"></label>
+      <div class="langs"><select id="langSel" aria-label="Language"></select></div>
+    </div>
+    <button class="big" id="openBtn"></button>
+  </div>
+</div>
+</div>
+
+<script src="../i18n.js"></script>
+<script src="texts.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var NS='http://www.w3.org/2000/svg';
+var svg=$('scene');
+function el(name,attrs,parent){var e=document.createElementNS(NS,name);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+
+/* ================= TEXTS (i18n) ================= */
+var T=WC.build(TX);
+var PLAY='https://play.google.com/store/apps/details?id=com.jookata.thiepdong';
+var q=new URLSearchParams(location.search);
+var hasParams=q.has('to')||q.has('from')||q.has('lang');
+var lang=WC.norm(q.get('lang'))||WC.norm(navigator.language)||'en';
+var nameTo=(q.get('to')||'').trim().slice(0,30);
+var nameFrom=(q.get('from')||'').trim().slice(0,30);
+var custom=(q.has('m')?WC.dec(q.get('m')):(q.get('msg')||'')).trim().slice(0,160);
+if(!hasParams){try{var sv=JSON.parse(localStorage.getItem('noelDemo')||'{}');nameTo=sv.to||'Lan';nameFrom=sv.from||'Minh';lang=WC.norm(sv.lang)||'vi'}catch(e){nameTo='Lan';nameFrom='Minh';lang='vi'}}
+if(!T[lang])lang='en';
+function fmt(s){var t=T[lang];return s.replace(/\{to\}/g,function(){return nameTo||t.anon}).replace(/\{from\}/g,function(){return nameFrom})}
+
+/* ================= STATIC SCENE GENERATION ================= */
+(function(){
+  var r=rng(7),g=$('stars');
+  for(var i=0;i<46;i++){
+    var x=r()*360,y=r()*300;
+    if(Math.hypot(x-255,y-110)<28)continue;
+    var c=el('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:(.6+r()*1.1).toFixed(2),fill:'#fff'},g);
+    c.style.animationDelay=(-r()*2.6).toFixed(2)+'s';
+  }
+  /* sao 8 tia: 2 tia dọc dài nhất, 2 tia ngang dài nhì, 4 tia chéo ngắn; mỗi tia to ở gốc, nhọn ở đầu */
+  (function(){var rg=$('rays'),L=[[0,31,2.5],[90,23,2.2],[180,31,2.5],[270,23,2.2],[45,14,1.6],[135,14,1.6],[225,14,1.6],[315,14,1.6]];
+    for(var i=0;i<L.length;i++){var ang=L[i][0]-90,len=L[i][1],w=L[i][2];
+      var p=el('polygon',{points:(-w)+',0 0,'+(-len)+' '+w+',0 0,'+(w*.8),transform:'rotate('+ang+')'.replace(/^rotate\(/,'rotate(')},rg);
+      p.setAttribute('transform','rotate('+(L[i][0])+')')}
+  })();
+  var sn=$('snow'),r2=rng(21);
+  for(var m=0;m<70;m++){
+    var d=5+r2()*6,f=el('circle',{cx:(r2()*360).toFixed(1),cy:-10,r:(1+r2()*1.8).toFixed(2),fill:'#fff',opacity:(.6+r2()*.4).toFixed(2)},sn);
+    f.style.animationDuration=d.toFixed(2)+'s';f.style.animationDelay=(-r2()*d).toFixed(2)+'s';f.style.setProperty('--dx',((r2()-.5)*50).toFixed(0)+'px');
+  }
+})();
+
+var LP=(function(){var r=[],rows=[.08,.15,.22,.29,.36,.43,.5,.57,.64,.71,.78,.85,.92];for(var i=0;i<rows.length;i++){var f=rows[i],k=Math.max(1,Math.round(1+f*5.2)),E=.25+1.85*f;for(var j=0;j<k;j++){var x=k===1?0:(-E+2*E*j/(k-1));if(i%2)x*=.92;r.push([x,f+(j%2?.012:-.012)])}}return r})();
+var TREE={cx:266,top:246,h:284};
+var LCOL=['#ff4d4d','#ffd54a','#4da6ff','#ff9ee5','#7dff9e','#ffffff'];
+
+/* ================= AUDIO ================= */
+var ac=null,master=null,muted=false,musicOn=false;
+function initAudio(){
+  if(ac)return;
+  try{
+    var C=window.AudioContext||window.webkitAudioContext;ac=new C();
+    master=ac.createGain();master.gain.value=.5;
+    var dl=ac.createDelay(1);dl.delayTime.value=.27;var fb=ac.createGain();fb.gain.value=.28;var wet=ac.createGain();wet.gain.value=.3;
+    master.connect(ac.destination);master.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(ac.destination);
+  }catch(e){ac=null}
+}
+function tone(f,t,d,vol,type){
+  var o=ac.createOscillator(),o2=ac.createOscillator(),g=ac.createGain(),g2=ac.createGain();
+  o.type=type||'triangle';o.frequency.value=f;o2.type='sine';o2.frequency.value=f*2;g2.gain.value=.25;
+  o.connect(g);o2.connect(g2);g2.connect(g);g.connect(master);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.start(t);o2.start(t);o.stop(t+d+.05);o2.stop(t+d+.05);
+}
+function chime(f){if(!ac||muted)return;try{var t=ac.currentTime;tone(f,t,.7,.2);tone(f*1.5,t+.09,.7,.14)}catch(e){}}
+var NOTE={C:523.25,D:587.33,E:659.25,F:698.46,G:783.99};
+/* Jingle Bells (nhạc phổ cập, 1857) – tiếng chuông tổng hợp bằng WebAudio */
+var MEL=[['E',1],['E',1],['E',2],['E',1],['E',1],['E',2],['E',1],['G',1],['C',1.5],['D',.5],['E',4],
+ ['F',1],['F',1],['F',1.5],['F',.5],['F',1],['E',1],['E',1],['E',.5],['E',.5],['G',1],['G',1],['F',1],['D',1],['C',4]];
+var BASS=[130.8,130.8,130.8,130.8,174.6,130.8,196,130.8];
+var Q=.36,LOOP=32*Q;
+function playLoop(t0){
+  if(!musicOn||!ac)return;
+  var t=t0;
+  for(var i=0;i<MEL.length;i++){tone(NOTE[MEL[i][0]],t,Math.min(1.4,MEL[i][1]*Q*1.7+.25),.2);t+=MEL[i][1]*Q}
+  for(var b=0;b<8;b++)tone(BASS[b],t0+b*4*Q,1.5,.14,'sine');
+  setTimeout(function(){playLoop(t0+LOOP)},Math.max(200,(t0+LOOP-ac.currentTime-1)*1000));
+}
+function startMusic(){if(!ac||musicOn)return;try{ac.resume()}catch(e){}musicOn=true;playLoop(ac.currentTime+.1)}
+function setMuted(m){muted=m;if(master)master.gain.setTargetAtTime(m?0:.5,ac.currentTime,.05);$('snd').textContent=m?'🔇':'🔊'}
+
+/* ================= HELPERS ================= */
+var fx=$('fx'),msg=$('msg'),msgText=$('msgText'),arrow=$('arrow'),toastEl=$('toast');
+var busy=false,sayT=null,toastT=null,active=[];
+var treeDone=false,dogDone=false;
+function say(t){msg.style.opacity=0;clearTimeout(sayT);sayT=setTimeout(function(){msgText.textContent=t;msg.style.opacity=1},230)}
+function toast(t){toastEl.textContent=t;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show')},1100)}
+function pt(e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+function ripple(x,y){
+  var c=el('circle',{cx:x,cy:y,r:4,fill:'none',stroke:'#fff','stroke-width':1.5},fx);
+  c.style.transformBox='fill-box';c.style.transformOrigin='center';
+  c.animate([{transform:'scale(1)',opacity:.9},{transform:'scale(5)',opacity:0}],{duration:520}).onfinish=function(){c.remove()};
+}
+function burst(x,y,col){
+  for(var i=0;i<10;i++){
+    var c=el('circle',{cx:x,cy:y,r:2.3,fill:col||'#ffe27a'},fx);
+    var a=i/10*Math.PI*2,d=18+Math.random()*18;
+    c.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+Math.cos(a)*d+'px,'+Math.sin(a)*d+'px) scale(.2)',opacity:0}],{duration:760,easing:'ease-out'}).onfinish=(function(n){return function(){n.remove()}})(c);
+  }
+}
+/* hạt tuyết văng theo quỹ đạo parabol: (x,y) gốc, vx/vy đơn vị/giây (vy âm = bay lên) */
+var SNOWC=['#8f9cbe','#a2aecd','#b6c1dc','#7e8baf','#c6d0e6','#98a5c6'];
+function flingSnow(x,y,n,vxMin,vxMax,vyMin,vyMax,parent){
+  for(var i=0;i<n;i++){
+    var vx=vxMin+Math.random()*(vxMax-vxMin),vy=-(vyMin+Math.random()*(vyMax-vyMin)),G=190,dur=.55+Math.random()*.5;
+    var r=1.7+Math.random()*2.9,c=el('circle',{cx:x+(Math.random()-.5)*5,cy:y,r:r.toFixed(2),fill:SNOWC[(Math.random()*SNOWC.length)|0],opacity:.95},parent||fx);
+    var kf=[];for(var s=0;s<=6;s++){var t=s/6*dur;kf.push({transform:'translate('+(vx*t).toFixed(1)+'px,'+(vy*t+.5*G*t*t).toFixed(1)+'px)',opacity:s<5?1:0})}
+    c.animate(kf,{duration:dur*1000,easing:'linear'}).onfinish=(function(n){return function(){n.remove()}})(c);
+  }
+}
+function showArrow(){arrow.setAttribute('transform','translate(168 416)');arrow.style.opacity=1}
+function hideArrow(){arrow.style.opacity=0}
+function setActive(names){active=names;var hs=document.querySelectorAll('#hot [data-h]');for(var i=0;i<hs.length;i++)hs[i].classList.toggle('on',names.indexOf(hs[i].getAttribute('data-h'))>=0)}
+function anim(node,frames,opts){opts.fill='forwards';return node.animate(frames,opts).finished}
+
+/* ================= STEPS ================= */
+async function doDoor(){
+  busy=true;setActive([]);hideArrow();burst(168,428,'#ffe08a');chime(523);
+  $('stage').classList.add('lit');
+  await sleep(900);
+  say(fmt(T[lang].s1));await sleep(1600);
+  setActive(['wood']);busy=false;
+}
+async function doWood(){
+  busy=true;setActive([]);burst(66,458,'#ffb35a');chime(587);
+  $('smokeG').classList.add('on');startSmoke();
+  await sleep(1500);
+  say(fmt(T[lang].s2));
+  await sleep(1300);
+  setActive(['tree']);busy=false;
+}
+/* khói ống khói: các cuộn khói mềm bốc lên, xoáy nhẹ, loãng dần, lặp mãi */
+var smokeTimer=null,smokeN=0;
+function puff(){
+  var g=$('smokeG'),k=smokeN++,dir=(k%2?1:-1),sw=12+Math.random()*10,rise=125+Math.random()*30,life=5200+Math.random()*1500;
+  var c=el('circle',{cx:0,cy:0,r:9+Math.random()*3,fill:'url(#puffG)'},g);
+  var x0=100,y0=259,kf=[];
+  for(var i=0;i<=10;i++){
+    var t=i/10,sc=.5+t*4.2,xx=x0+Math.sin(t*Math.PI*2.2+k)*sw*t*1.6+t*t*16,yy=y0-rise*t,op=t<.12?t/.12:Math.max(0,1-Math.pow((t-.12)/.88,1.4));
+    kf.push({transform:'translate('+xx.toFixed(1)+'px,'+yy.toFixed(1)+'px) scale('+sc.toFixed(2)+')',opacity:op.toFixed(2),offset:t});
+  }
+  c.animate(kf,{duration:life,easing:'linear'}).onfinish=function(){c.remove()};
+}
+function startSmoke(){if(smokeTimer)return;for(var i=0;i<6;i++)setTimeout(puff,i*260);smokeTimer=setInterval(puff,520)}
+/* tuyết bị văng ra ở góc trái: không gợi ý, chỉ là hoạt ảnh để người nhận tò mò */
+var sprayTimer=null;
+function startSpray(){
+  stopSpray();
+  var g=$('spray');
+  (function loop(){flingSnow(50,516,10,-8,36,60,115,g);sprayTimer=setTimeout(loop,950)})();
+}
+function stopSpray(){clearTimeout(sprayTimer);sprayTimer=null}
+
+async function doTree(){
+  busy=true;setActive([]);chime(659);
+  var tree=$('tree');
+  await anim(tree,[{transform:'scale(.17)'},{transform:'scale(1.06)',offset:.7},{transform:'scale(1)'}],{duration:1200,easing:'cubic-bezier(.3,.9,.4,1)'});
+  tree.style.transform='scale(1)';
+  burst(266,430,'#cfe8ff');
+  treeDone=true;
+  await sleep(900);
+  say(fmt(T[lang].s3));setActive(['star']);await sleep(300);busy=false;
+}
+/* chó phóng ra từ chỗ tuyết văng: dáng 1 (bật ra) → dáng 2 (lơ lửng) → dáng 1 ... → dáng 3 (thắng gấp trước cây) */
+function wagTail(){$('tailR').animate([{transform:'rotate(-14deg)'},{transform:'rotate(18deg)'}],{duration:240,direction:'alternate',iterations:Infinity,easing:'ease-in-out'})}
+function runDog(){
+  return new Promise(function(res){
+    var g=$('dogG'),im=[$('dog2'),$('dog3'),$('dogSit')];
+    /* 3 vị trí thẳng hàng đi từ chỗ tuyết văng tới chỗ chó ngồi */
+    var P=[[107,529],[132,527],[160,534]];
+    function show(n,i){for(var k=0;k<3;k++){im[k].style.visibility=k===n?'visible':'hidden';im[k].style.opacity=k===n?1:0}
+      if(i>=0)g.style.transform='translate('+P[i][0]+'px,'+P[i][1]+'px)'}
+    g.style.opacity=1;
+    /* không chuyển động tịnh tiến: mỗi bước đứng 0,5s rồi hình cũ biến mất, hình mới hiện */
+    show(-1,-1);chime(494);flingSnow(50,520,30,5,85,50,125);
+    setTimeout(function(){show(0,0);chime(587);flingSnow(100,526,12,10,60,20,60);
+      setTimeout(function(){show(1,1);chime(330);flingSnow(P[1][0]+22,P[1][1]-3,36,20,105,25,80);
+        setTimeout(function(){show(2,2);wagTail();res()},500);
+      },500);
+    },500);
+  });
+}
+function dropCollar(){
+  var ca=$('collarA');
+  $('neckBand').style.opacity=0;
+  ca.style.opacity=1;
+  chime(700);
+  return ca.animate([
+    {transform:'translate(-19px,-47px) rotate(-70deg) scale(.7)',easing:'ease-in'},
+    {transform:'translate(-8px,-6px) rotate(25deg) scale(1)',offset:.55},
+    {transform:'translate(0px,0px) rotate(0deg)',offset:.7,easing:'ease-out'},
+    {transform:'translate(1px,-5px) rotate(8deg)',offset:.83,easing:'ease-in'},
+    {transform:'translate(0px,0px) rotate(0deg)'}
+  ],{duration:1200,fill:'forwards'}).finished;
+}
+function showCat1(){
+  var p=$('cat1P');
+  $('treeFront').style.opacity=1;
+  p.style.opacity=1;
+  /* chui ra từ từ: đầu mèo trồi lên sau mảnh cành thông */
+  p.animate([{transform:'translateY(12px)'},{transform:'translateY(0)'}],{duration:2200,easing:'cubic-bezier(.3,.7,.3,1)'});
+  setTimeout(function(){$('cat1R').animate([{transform:'rotate(-7deg)'},{transform:'rotate(7deg)'}],{duration:1200,direction:'alternate',iterations:Infinity,easing:'ease-in-out'})},1800);
+  chime(880);
+}
+/* nhạc nổi lên: mèo 1 biến mất ngay, mèo 2 hiện ra ngay, khều vòng cổ đỏ lặp mãi */
+function swapCats(){
+  $('cat1P').getAnimations().forEach(function(x){x.cancel()});
+  $('cat1P').style.opacity=0;$('treeFront').style.opacity=0;
+  $('cat2P').style.opacity=1;
+  var T=2100;
+  $('armR').animate([
+    {transform:'rotate(0deg)',easing:'ease-in'},
+    {transform:'rotate(-55deg)',offset:.3,easing:'ease-out'},
+    {transform:'rotate(-30deg)',offset:.5,easing:'ease-in-out'},
+    {transform:'rotate(-55deg)',offset:.62,easing:'ease-in-out'},
+    {transform:'rotate(0deg)'}
+  ],{duration:T,iterations:Infinity});
+  var ca=$('collarA');ca.getAnimations().forEach(function(x){x.cancel()});
+  ca.animate([
+    {transform:'translate(0px,0px) rotate(0deg)',offset:0},
+    {transform:'translate(0px,0px) rotate(0deg)',offset:.3,easing:'ease-out'},
+    {transform:'translate(2px,-6px) rotate(40deg)',offset:.5,easing:'ease-in-out'},
+    {transform:'translate(1px,-8px) rotate(80deg)',offset:.62,easing:'ease-in'},
+    {transform:'translate(-1px,0px) rotate(130deg)',offset:.8,easing:'ease-out'},
+    {transform:'translate(0px,-1px) rotate(160deg)',offset:.9},
+    {transform:'translate(0px,0px) rotate(180deg)',offset:1}
+  ],{duration:T,iterations:Infinity});
+}
+async function doSpray(){
+  busy=true;setActive([]);stopSpray();
+  await runDog();
+  dogDone=true;
+  await sleep(800);
+  await dropCollar();
+  await sleep(500);
+  say(fmt(T[lang].s4));await sleep(800);
+  setActive(['sky']);busy=false;
+}
+async function doStar(){
+  busy=true;setActive([]);chime(784);
+  var star=$('bigStar');
+  await anim(star,[{transform:'translate(255px,110px) scale(.8)'},{transform:'translate(290px,150px) scale(1)',offset:.4},{transform:'translate(266px,250px) scale(1.05)'}],{duration:1600,easing:'ease-in-out'});
+  star.style.transform='translate(266px,250px) scale(1.05)';
+  burst(266,250,'#fff4b0');
+  $('stars').classList.add('tw');
+  var lg=$('lights');
+  for(var i=0;i<LP.length;i++){
+    var f=LP[i][1],hw=95*(.2+.8*f),x=TREE.cx+LP[i][0]*.5*hw,y=TREE.top+f*TREE.h;
+    if(i===42)x-=12; /* bóng đỏ sát tai mèo: dời sang trái */
+    var gp=el('g',{'class':'light'},lg);
+    el('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:6.5,fill:LCOL[i%LCOL.length],opacity:.28},gp);
+    el('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:3,fill:LCOL[i%LCOL.length]},gp);
+    gp.style.animationDelay=(-(i%6)*.27).toFixed(2)+'s';
+    gp.style.opacity=1;
+    gp.animate([{transform:'scale(0)'},{transform:'scale(1.7)',offset:.6},{transform:'scale(1)'}],{duration:340});
+    gp.style.animationDuration=(.7+Math.random()*1.1).toFixed(2)+'s';
+    if(i%5===0)chime(880+(i%12)*40);
+    await sleep(60);
+  }
+  lg.classList.add('blink');
+  showCat1();await sleep(2000);
+  say(fmt(T[lang].s3b));startSpray();await sleep(800);
+  setActive(['spray']);busy=false;
+}
+async function doSky(){
+  busy=true;setActive([]);
+  if(ac){try{ac.resume()}catch(e){}}
+  chime(1046);
+  $('snow').classList.add('on');
+  msg.style.opacity=0;
+  await sleep(1700);
+  await sleep(1100);
+  startMusic();swapCats();
+  $('snd').style.display='block';
+  burst(266,250,'#fff4b0');
+  showFinal();
+  busy=false;
+}
+function showFinal(){
+  var t=T[lang];
+  msg.classList.add('final');msg.style.opacity=0;
+  setTimeout(function(){
+    msgText.textContent=fmt(t.fin);
+    $('msgMsg').textContent=custom;$('msgMsg').style.display=custom?'block':'none';
+    $('msgSign').textContent=nameFrom?fmt(t.sign):'';$('msgSign').style.display=nameFrom?'block':'none';
+    $('replay').textContent=t.replay;
+    $('dlT').textContent=t.dl;$('dlA').textContent=PLAY;$('dlA').href=PLAY;
+    msg.style.opacity=1;
+  },260);
+}
+
+/* ================= INPUT ================= */
+var handlers={door:doDoor,wood:doWood,tree:doTree,spray:doSpray,star:doStar,sky:doSky};
+var TG={wood:[66,460],tree:[266,500],spray:[54,520],star:[255,110],sky:[180,200]};
+var hots=document.querySelectorAll('#hot [data-h]');
+for(var i=0;i<hots.length;i++){
+  hots[i].addEventListener('pointerdown',function(e){
+    var n=this.getAttribute('data-h');
+    if(busy||active.indexOf(n)<0)return;
+    e.stopPropagation();
+    var p=pt(e);ripple(p.x,p.y);
+    handlers[n]();
+  });
+}
+/* chạm trượt: báo "lạnh / ấm / nóng" thay cho mũi tên (trừ bước cửa nhà đầu tiên có mũi tên) */
+svg.addEventListener('pointerdown',function(e){
+  if(busy||!active.length)return;
+  var p=pt(e);ripple(p.x,p.y);
+  if(active.length===1&&active[0]==='door'){
+    msg.animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:300});
+    return;
+  }
+  var d=1e9;
+  for(var k=0;k<active.length;k++){var tg=TG[active[k]];if(tg)d=Math.min(d,Math.hypot(p.x-tg[0],p.y-tg[1]))}
+  var t=T[lang];
+  toast(d<70?t.hot:d<150?t.warm:t.cold);
+});
+$('snd').addEventListener('click',function(){setMuted(!muted)});
+$('replay').addEventListener('click',function(){location.reload()});
+
+/* ================= START SCREEN ================= */
+function renderStart(){
+  var t=T[lang];
+  $('stTitle').textContent=t.title;
+  $('openBtn').textContent=t.open;
+  $('demo').style.display=hasParams?'none':'block';
+  if(hasParams){
+    $('stFrom').textContent=nameFrom?fmt(t.fromLine):'';
+    $('stTo').textContent=nameTo?fmt(t.toLine):'';
+  }else{
+    $('stFrom').textContent='';$('stTo').textContent='';
+    $('stNote').textContent=t.note;$('lblTo').textContent=t.lblTo;$('lblFrom').textContent=t.lblFrom;
+    $('inTo').value=nameTo;$('inFrom').value=nameFrom;
+    $('langSel').value=lang;
+  }
+  document.documentElement.lang=lang;document.documentElement.dir='ltr';
+}
+renderStart();
+$('inTo').addEventListener('input',function(){nameTo=this.value.trim().slice(0,30)});
+$('inFrom').addEventListener('input',function(){nameFrom=this.value.trim().slice(0,30)});
+(function(){var sel=$('langSel');WC.LANGS.forEach(function(L){var o=document.createElement('option');o.value=L;o.textContent=WC.NATIVE[L];sel.appendChild(o)});sel.value=lang;sel.addEventListener('change',function(){lang=this.value;renderStart()})})();
+$('openBtn').addEventListener('click',function(){
+  if(!hasParams){try{localStorage.setItem('noelDemo',JSON.stringify({to:nameTo,from:nameFrom,lang:lang}))}catch(e){}}
+  initAudio();if(ac){try{ac.resume()}catch(e){}}
+  chime(523);
+  $('start').classList.add('hide');
+  showArrow();setActive(['door']);say(fmt(T[lang].s0));
+});
+})();
+</script>
+</body>
+</html>
