@@ -49,3 +49,11 @@ App đang dùng **ID TEST của AdMob**, an toàn để chạy thử.
 - Hình chó/mèo/ngôi sao trong thiệp Noel đang là hình vẽ tạm, sẽ thay bằng ảnh cùng phong cách.
 - Nhạc đang là Jingle Bells (nhạc phổ cập) tổng hợp bằng trình duyệt; có thể thay bằng bản thu có bản quyền rõ ràng.
 - Tên người nhận/lời chúc nằm trong link nên người nào có link đều thấy; nhật ký của GitHub Pages có thể ghi lại địa chỉ truy cập (đã nêu trong chính sách quyền riêng tư).
+
+## Ngôn ngữ, mã hoá lời chúc, nhóm thiệp
+
+- **16 ngôn ngữ** của thiệp: vi, en, fr, de, it, pl, fi, es, pt, sk, ko, ja, zh (giản thể), zh-TW (phồn thể), th, ms. Chữ giao diện app cũng có đủ 16 ngôn ngữ.
+- Bản dịch nằm ở `design/i18n_src_a.py` (chung + Noel), `i18n_src_b.py` (Santa), `i18n_src_c.py` (giao diện app). Sửa xong chạy `python3 design/build_i18n.py` để sinh lại `docs/i18n.js`, `docs/*/texts.js`, `android/.../res/values*/strings.xml` và `Lang.java`. Đừng sửa tay các file sinh ra.
+- **Lời chúc riêng** trong link được mã hoá XOR + base64url (tham số `m`), khoá `w1nk-c4rd-2026` ở `LinkBuilder.java` và `docs/i18n.js`. Link cũ dùng `msg=` chữ thường vẫn đọc được. Đây chỉ là che mắt cho link không đọc ra chữ, không phải bảo mật.
+- **Nhóm thiệp** trong app: Giáng sinh, Sinh nhật, Đón năm mới (hai nhóm sau đang trống, hiện "sắp ra mắt"). Thêm mẫu mới ở `Templates.java`.
+- Mẫu hiện có: `noel` (Đêm Noel trong rừng) và `santa` (Ông già Noel say rượu), cả hai thuộc nhóm Giáng sinh.
