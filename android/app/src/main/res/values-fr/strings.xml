@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Choisir une carte</string>
+    <string name="main_sub">Créez une carte animée et envoyez-la par message.</string>
+    <string name="cat_xmas">Noël</string>
+    <string name="cat_birthday">Anniversaire</string>
+    <string name="cat_newyear">Nouvel An</string>
+    <string name="cat_empty">D’autres cartes pour cette catégorie arrivent bientôt !</string>
+    <string name="tpl_noel_title">Carte de Noël : Nuit dans la forêt</string>
+    <string name="tpl_noel_desc">Le destinataire explore : allumer le chalet, faire pousser le sapin, accueillir la neige et recevoir un message à son nom.</string>
+    <string name="tpl_santa_title">Carte de Noël : Le Père Noël a trop dormi</string>
+    <string name="tpl_santa_desc">Réveillez le Père Noël pompette avec un seau d’eau, trouvez un renne pour tirer le traîneau, chargez les cadeaux et livrez-les par la cheminée.</string>
+    <string name="btn_use">Utiliser cette carte</string>
+    <string name="create_title">Créer votre carte</string>
+    <string name="hint_to">Nom du destinataire</string>
+    <string name="hint_from">Votre nom (expéditeur)</string>
+    <string name="hint_msg">Message personnel (facultatif)</string>
+    <string name="lang_label">Langue de la carte</string>
+    <string name="btn_preview">Aperçu</string>
+    <string name="btn_share">Partager la carte</string>
+    <string name="btn_copy">Copier le lien</string>
+    <string name="copied">Lien copié</string>
+    <string name="share_chooser">Envoyer la carte via</string>
+</resources>

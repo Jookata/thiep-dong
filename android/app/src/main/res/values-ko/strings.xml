@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">카드 고르기</string>
+    <string name="main_sub">움직이는 카드를 만들어 메신저나 문자로 보내 보세요.</string>
+    <string name="cat_xmas">크리스마스</string>
+    <string name="cat_birthday">생일</string>
+    <string name="cat_newyear">새해</string>
+    <string name="cat_empty">이 카테고리의 카드가 곧 추가됩니다!</string>
+    <string name="tpl_noel_title">크리스마스 카드: 숲속의 밤</string>
+    <string name="tpl_noel_desc">받는 사람이 직접 탐험해요: 오두막에 불을 켜고, 나무를 키우고, 눈을 맞이하면 이름이 담긴 인사말이 나와요.</string>
+    <string name="tpl_santa_title">크리스마스 카드: 늦잠 잔 산타 할아버지</string>
+    <string name="tpl_santa_desc">물 한 양동이로 취한 산타 할아버지를 깨우고, 썰매를 끌 순록을 찾아 선물을 싣고 굴뚝으로 배달해요.</string>
+    <string name="btn_use">이 카드 사용</string>
+    <string name="create_title">카드 만들기</string>
+    <string name="hint_to">받는 사람 이름</string>
+    <string name="hint_from">내 이름 (보내는 사람)</string>
+    <string name="hint_msg">개인 메시지 (선택)</string>
+    <string name="lang_label">카드 언어</string>
+    <string name="btn_preview">미리보기</string>
+    <string name="btn_share">카드 공유</string>
+    <string name="btn_copy">링크 복사</string>
+    <string name="copied">링크가 복사되었습니다</string>
+    <string name="share_chooser">카드 보내기</string>
+</resources>

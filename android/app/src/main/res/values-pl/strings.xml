@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Wybierz kartkę</string>
+    <string name="main_sub">Stwórz animowaną kartkę i wyślij ją w czacie lub SMS-em.</string>
+    <string name="cat_xmas">Boże Narodzenie</string>
+    <string name="cat_birthday">Urodziny</string>
+    <string name="cat_newyear">Nowy Rok</string>
+    <string name="cat_empty">Więcej kartek w tej kategorii już wkrótce!</string>
+    <string name="tpl_noel_title">Kartka świąteczna: Noc w lesie</string>
+    <string name="tpl_noel_desc">Odbiorca sam odkrywa: zapala światła w chatce, hoduje choinkę, wita śnieg i dostaje życzenia ze swoim imieniem.</string>
+    <string name="tpl_santa_title">Kartka świąteczna: Mikołaj zaspał</string>
+    <string name="tpl_santa_desc">Obudź podchmielonego Mikołaja wiadrem wody, znajdź renifera do sań, załaduj prezenty i dostarcz je kominem.</string>
+    <string name="btn_use">Użyj tej kartki</string>
+    <string name="create_title">Stwórz kartkę</string>
+    <string name="hint_to">Imię odbiorcy</string>
+    <string name="hint_from">Twoje imię (nadawca)</string>
+    <string name="hint_msg">Osobista wiadomość (opcjonalnie)</string>
+    <string name="lang_label">Język kartki</string>
+    <string name="btn_preview">Podgląd</string>
+    <string name="btn_share">Udostępnij kartkę</string>
+    <string name="btn_copy">Kopiuj link</string>
+    <string name="copied">Skopiowano link</string>
+    <string name="share_chooser">Wyślij kartkę przez</string>
+</resources>

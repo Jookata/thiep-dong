@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WinkCard</string>
+    <string name="main_title">Pick a card</string>
+    <string name="main_sub">Make an animated card and send it by chat or text.</string>
+    <string name="cat_xmas">Christmas</string>
+    <string name="cat_birthday">Birthday</string>
+    <string name="cat_newyear">New Year</string>
+    <string name="cat_empty">More cards for this category are coming soon!</string>
+    <string name="tpl_noel_title">Christmas card: Night in the forest</string>
+    <string name="tpl_noel_desc">The recipient explores it: light up the cabin, grow the tree, welcome the snow and get a greeting with their name.</string>
+    <string name="tpl_santa_title">Christmas card: Santa overslept</string>
+    <string name="tpl_santa_desc">Wake the tipsy Santa with a bucket of water, find a reindeer to pull the sleigh, load the gifts and deliver them down the chimney.</string>
+    <string name="btn_use">Use this card</string>
+    <string name="create_title">Create your card</string>
+    <string name="hint_to">Recipient name</string>
+    <string name="hint_from">Your name (sender)</string>
+    <string name="hint_msg">Personal message (optional)</string>
+    <string name="lang_label">Card language</string>
+    <string name="btn_preview">Preview</string>
+    <string name="btn_share">Share card</string>
+    <string name="btn_copy">Copy link</string>
+    <string name="copied">Link copied</string>
+    <string name="share_chooser">Send card via</string>
+</resources>

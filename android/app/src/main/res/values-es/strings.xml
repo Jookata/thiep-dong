@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Elige una tarjeta</string>
+    <string name="main_sub">Crea una tarjeta animada y envíala por chat o mensaje.</string>
+    <string name="cat_xmas">Navidad</string>
+    <string name="cat_birthday">Cumpleaños</string>
+    <string name="cat_newyear">Año Nuevo</string>
+    <string name="cat_empty">¡Pronto habrá más tarjetas en esta categoría!</string>
+    <string name="tpl_noel_title">Tarjeta de Navidad: Noche en el bosque</string>
+    <string name="tpl_noel_desc">El destinatario la explora: enciende la cabaña, hace crecer el árbol, recibe la nieve y obtiene un saludo con su nombre.</string>
+    <string name="tpl_santa_title">Tarjeta de Navidad: Papá Noel se quedó dormido</string>
+    <string name="tpl_santa_desc">Despierta a Papá Noel achispado con un cubo de agua, busca un reno que tire del trineo, carga los regalos y repártelos por la chimenea.</string>
+    <string name="btn_use">Usar esta tarjeta</string>
+    <string name="create_title">Crea tu tarjeta</string>
+    <string name="hint_to">Nombre del destinatario</string>
+    <string name="hint_from">Tu nombre (remitente)</string>
+    <string name="hint_msg">Mensaje personal (opcional)</string>
+    <string name="lang_label">Idioma de la tarjeta</string>
+    <string name="btn_preview">Vista previa</string>
+    <string name="btn_share">Compartir tarjeta</string>
+    <string name="btn_copy">Copiar enlace</string>
+    <string name="copied">Enlace copiado</string>
+    <string name="share_chooser">Enviar tarjeta por</string>
+</resources>

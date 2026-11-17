@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">カードを選ぶ</string>
+    <string name="main_sub">動くカードを作って、チャットやメッセージで送ろう。</string>
+    <string name="cat_xmas">クリスマス</string>
+    <string name="cat_birthday">誕生日</string>
+    <string name="cat_newyear">新年</string>
+    <string name="cat_empty">このカテゴリーのカードは近日公開予定です！</string>
+    <string name="tpl_noel_title">クリスマスカード：森の夜</string>
+    <string name="tpl_noel_desc">受け取った人が自分で探検：小屋に明かりを灯し、木を育て、雪を迎えると、名前入りのメッセージが届きます。</string>
+    <string name="tpl_santa_title">クリスマスカード：寝坊したサンタさん</string>
+    <string name="tpl_santa_desc">ほろ酔いサンタさんをバケツの水で起こし、そりを引くトナカイを見つけ、プレゼントを積んで煙突から届けよう。</string>
+    <string name="btn_use">このカードを使う</string>
+    <string name="create_title">カードを作成</string>
+    <string name="hint_to">受取人の名前</string>
+    <string name="hint_from">あなたの名前（送り主）</string>
+    <string name="hint_msg">メッセージ（任意）</string>
+    <string name="lang_label">カードの言語</string>
+    <string name="btn_preview">プレビュー</string>
+    <string name="btn_share">カードを共有</string>
+    <string name="btn_copy">リンクをコピー</string>
+    <string name="copied">リンクをコピーしました</string>
+    <string name="share_chooser">カードの送信先</string>
+</resources>

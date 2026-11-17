@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Chọn mẫu thiệp</string>
+    <string name="main_sub">Tạo thiệp động, gửi qua Zalo, Messenger, tin nhắn…</string>
+    <string name="cat_xmas">Giáng sinh</string>
+    <string name="cat_birthday">Sinh nhật</string>
+    <string name="cat_newyear">Đón năm mới</string>
+    <string name="cat_empty">Các mẫu thiệp cho mục này sắp ra mắt!</string>
+    <string name="tpl_noel_title">Thiệp Noel: Đêm Noel trong rừng</string>
+    <string name="tpl_noel_desc">Người nhận tự khám phá: bật đèn ngôi nhà, trồng cây thông, đón tuyết rơi và nhận lời chúc mang tên mình.</string>
+    <string name="tpl_santa_title">Thiệp Noel: Ông già Noel say rượu</string>
+    <string name="tpl_santa_desc">Dội xô nước đánh thức ông già Noel say, tìm tuần lộc kéo xe, chất quà lên xe rồi thả xuống ống khói.</string>
+    <string name="btn_use">Dùng mẫu này</string>
+    <string name="create_title">Tạo thiệp</string>
+    <string name="hint_to">Tên người nhận</string>
+    <string name="hint_from">Tên người gửi (bạn)</string>
+    <string name="hint_msg">Lời chúc riêng (không bắt buộc)</string>
+    <string name="lang_label">Ngôn ngữ của thiệp</string>
+    <string name="btn_preview">Xem thử</string>
+    <string name="btn_share">Chia sẻ thiệp</string>
+    <string name="btn_copy">Sao chép link</string>
+    <string name="copied">Đã sao chép link</string>
+    <string name="share_chooser">Gửi thiệp qua</string>
+</resources>

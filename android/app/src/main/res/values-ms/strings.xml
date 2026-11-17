@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Pilih kad</string>
+    <string name="main_sub">Cipta kad animasi dan hantar melalui sembang atau mesej.</string>
+    <string name="cat_xmas">Krismas</string>
+    <string name="cat_birthday">Hari Lahir</string>
+    <string name="cat_newyear">Tahun Baharu</string>
+    <string name="cat_empty">Lebih banyak kad untuk kategori ini akan datang tidak lama lagi!</string>
+    <string name="tpl_noel_title">Kad Krismas: Malam di hutan</string>
+    <string name="tpl_noel_desc">Penerima meneroka sendiri: nyalakan pondok, tumbuhkan pokok, sambut salji dan terima ucapan bernama mereka.</string>
+    <string name="tpl_santa_title">Kad Krismas: Santa Claus terlajak tidur</string>
+    <string name="tpl_santa_desc">Bangunkan Santa Claus yang mabuk dengan baldi air, cari rusa untuk menarik kereta salji, muatkan hadiah dan hantar melalui serobong.</string>
+    <string name="btn_use">Guna kad ini</string>
+    <string name="create_title">Cipta kad anda</string>
+    <string name="hint_to">Nama penerima</string>
+    <string name="hint_from">Nama anda (pengirim)</string>
+    <string name="hint_msg">Mesej peribadi (pilihan)</string>
+    <string name="lang_label">Bahasa kad</string>
+    <string name="btn_preview">Pratonton</string>
+    <string name="btn_share">Kongsi kad</string>
+    <string name="btn_copy">Salin pautan</string>
+    <string name="copied">Pautan disalin</string>
+    <string name="share_chooser">Hantar kad melalui</string>
+</resources>

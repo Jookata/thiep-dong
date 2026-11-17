@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">เลือกการ์ด</string>
+    <string name="main_sub">สร้างการ์ดภาพเคลื่อนไหวแล้วส่งผ่านแชตหรือข้อความ</string>
+    <string name="cat_xmas">คริสต์มาส</string>
+    <string name="cat_birthday">วันเกิด</string>
+    <string name="cat_newyear">ปีใหม่</string>
+    <string name="cat_empty">การ์ดหมวดนี้จะมาเร็ว ๆ นี้!</string>
+    <string name="tpl_noel_title">การ์ดคริสต์มาส: คืนในป่า</string>
+    <string name="tpl_noel_desc">ผู้รับสำรวจเอง: เปิดไฟกระท่อม ปลูกต้นสน ต้อนรับหิมะ แล้วรับคำอวยพรที่มีชื่อของตัวเอง</string>
+    <string name="tpl_santa_title">การ์ดคริสต์มาส: ซานตาคลอสนอนเพลิน</string>
+    <string name="tpl_santa_desc">ปลุกซานตาคลอสที่เมาด้วยถังน้ำ หากวางเรนเดียร์มาลากเลื่อน บรรทุกของขวัญแล้วส่งลงทางปล่องไฟ</string>
+    <string name="btn_use">ใช้การ์ดนี้</string>
+    <string name="create_title">สร้างการ์ดของคุณ</string>
+    <string name="hint_to">ชื่อผู้รับ</string>
+    <string name="hint_from">ชื่อของคุณ (ผู้ส่ง)</string>
+    <string name="hint_msg">ข้อความส่วนตัว (ไม่บังคับ)</string>
+    <string name="lang_label">ภาษาของการ์ด</string>
+    <string name="btn_preview">ดูตัวอย่าง</string>
+    <string name="btn_share">แชร์การ์ด</string>
+    <string name="btn_copy">คัดลอกลิงก์</string>
+    <string name="copied">คัดลอกลิงก์แล้ว</string>
+    <string name="share_chooser">ส่งการ์ดผ่าน</string>
+</resources>

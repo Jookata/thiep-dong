@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Escolha um cartão</string>
+    <string name="main_sub">Crie um cartão animado e envie por chat ou mensagem.</string>
+    <string name="cat_xmas">Natal</string>
+    <string name="cat_birthday">Aniversário</string>
+    <string name="cat_newyear">Ano Novo</string>
+    <string name="cat_empty">Mais cartões para esta categoria chegam em breve!</string>
+    <string name="tpl_noel_title">Cartão de Natal: Noite na floresta</string>
+    <string name="tpl_noel_desc">O destinatário explora: acende a cabana, faz a árvore crescer, recebe a neve e ganha uma mensagem com o seu nome.</string>
+    <string name="tpl_santa_title">Cartão de Natal: O Papai Noel dormiu demais</string>
+    <string name="tpl_santa_desc">Acorde o Papai Noel alegrinho com um balde de água, encontre uma rena para puxar o trenó, carregue os presentes e entregue pela chaminé.</string>
+    <string name="btn_use">Usar este cartão</string>
+    <string name="create_title">Criar seu cartão</string>
+    <string name="hint_to">Nome do destinatário</string>
+    <string name="hint_from">Seu nome (remetente)</string>
+    <string name="hint_msg">Mensagem pessoal (opcional)</string>
+    <string name="lang_label">Idioma do cartão</string>
+    <string name="btn_preview">Pré-visualizar</string>
+    <string name="btn_share">Compartilhar cartão</string>
+    <string name="btn_copy">Copiar link</string>
+    <string name="copied">Link copiado</string>
+    <string name="share_chooser">Enviar cartão por</string>
+</resources>

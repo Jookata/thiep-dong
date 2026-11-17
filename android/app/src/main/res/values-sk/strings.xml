@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Vyberte pohľadnicu</string>
+    <string name="main_sub">Vytvorte animovanú pohľadnicu a pošlite ju cez chat alebo SMS.</string>
+    <string name="cat_xmas">Vianoce</string>
+    <string name="cat_birthday">Narodeniny</string>
+    <string name="cat_newyear">Nový rok</string>
+    <string name="cat_empty">Ďalšie pohľadnice v tejto kategórii pribudnú čoskoro!</string>
+    <string name="tpl_noel_title">Vianočná pohľadnica: Noc v lese</string>
+    <string name="tpl_noel_desc">Príjemca ju sám objavuje: rozsvieti chatku, vypestuje stromček, privíta sneh a dostane blahoželanie so svojím menom.</string>
+    <string name="tpl_santa_title">Vianočná pohľadnica: Santa Claus zaspal</string>
+    <string name="tpl_santa_desc">Zobuďte podnapitého Santa Clausa vedrom vody, nájdite soba, ktorý potiahne sane, naložte darčeky a doručte ich komínom.</string>
+    <string name="btn_use">Použiť túto pohľadnicu</string>
+    <string name="create_title">Vytvorte pohľadnicu</string>
+    <string name="hint_to">Meno príjemcu</string>
+    <string name="hint_from">Vaše meno (odosielateľ)</string>
+    <string name="hint_msg">Osobná správa (voliteľné)</string>
+    <string name="lang_label">Jazyk pohľadnice</string>
+    <string name="btn_preview">Ukážka</string>
+    <string name="btn_share">Zdieľať pohľadnicu</string>
+    <string name="btn_copy">Kopírovať odkaz</string>
+    <string name="copied">Odkaz skopírovaný</string>
+    <string name="share_chooser">Odoslať pohľadnicu cez</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Valitse kortti</string>
+    <string name="main_sub">Tee animoitu kortti ja lähetä se viestillä.</string>
+    <string name="cat_xmas">Joulu</string>
+    <string name="cat_birthday">Syntymäpäivä</string>
+    <string name="cat_newyear">Uusi vuosi</string>
+    <string name="cat_empty">Lisää kortteja tähän luokkaan tulossa pian!</string>
+    <string name="tpl_noel_title">Joulukortti: Yö metsässä</string>
+    <string name="tpl_noel_desc">Vastaanottaja tutkii itse: sytytä mökin valot, kasvata kuusi, toivota lumi tervetulleeksi ja saa tervehdys omalla nimellään.</string>
+    <string name="tpl_santa_title">Joulukortti: Joulupukki nukkui pommiin</string>
+    <string name="tpl_santa_desc">Herätä hiprakkainen joulupukki vesisangolla, etsi poro vetämään rekeä, lastaa lahjat ja toimita ne savupiipusta.</string>
+    <string name="btn_use">Käytä tätä korttia</string>
+    <string name="create_title">Luo korttisi</string>
+    <string name="hint_to">Vastaanottajan nimi</string>
+    <string name="hint_from">Sinun nimesi (lähettäjä)</string>
+    <string name="hint_msg">Henkilökohtainen viesti (valinnainen)</string>
+    <string name="lang_label">Kortin kieli</string>
+    <string name="btn_preview">Esikatselu</string>
+    <string name="btn_share">Jaa kortti</string>
+    <string name="btn_copy">Kopioi linkki</string>
+    <string name="copied">Linkki kopioitu</string>
+    <string name="share_chooser">Lähetä kortti käyttäen</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">选择贺卡</string>
+    <string name="main_sub">制作动态贺卡，通过聊天或短信发送。</string>
+    <string name="cat_xmas">圣诞节</string>
+    <string name="cat_birthday">生日</string>
+    <string name="cat_newyear">新年</string>
+    <string name="cat_empty">此分类的更多贺卡即将推出！</string>
+    <string name="tpl_noel_title">圣诞贺卡：森林之夜</string>
+    <string name="tpl_noel_desc">收卡人自己探索：点亮小木屋、种出圣诞树、迎接飘雪，就能收到带有自己名字的祝福。</string>
+    <string name="tpl_santa_title">圣诞贺卡：睡过头的圣诞老人</string>
+    <string name="tpl_santa_desc">用一桶水唤醒微醺的圣诞老人，找到拉雪橇的驯鹿，装上礼物，从烟囱送出去。</string>
+    <string name="btn_use">使用此贺卡</string>
+    <string name="create_title">制作贺卡</string>
+    <string name="hint_to">收件人姓名</string>
+    <string name="hint_from">你的姓名（发送人）</string>
+    <string name="hint_msg">个人留言（可选）</string>
+    <string name="lang_label">贺卡语言</string>
+    <string name="btn_preview">预览</string>
+    <string name="btn_share">分享贺卡</string>
+    <string name="btn_copy">复制链接</string>
+    <string name="copied">链接已复制</string>
+    <string name="share_chooser">通过以下方式发送贺卡</string>
+</resources>

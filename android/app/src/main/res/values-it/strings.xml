@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name lấy từ values/strings.xml -->
+    <string name="main_title">Scegli un biglietto</string>
+    <string name="main_sub">Crea un biglietto animato e invialo in chat o con un messaggio.</string>
+    <string name="cat_xmas">Natale</string>
+    <string name="cat_birthday">Compleanno</string>
+    <string name="cat_newyear">Capodanno</string>
+    <string name="cat_empty">Altri biglietti per questa categoria arriveranno presto!</string>
+    <string name="tpl_noel_title">Biglietto di Natale: Notte nel bosco</string>
+    <string name="tpl_noel_desc">Il destinatario lo esplora: accende la baita, fa crescere l’albero, accoglie la neve e riceve un augurio con il suo nome.</string>
+    <string name="tpl_santa_title">Biglietto di Natale: Babbo Natale ha dormito troppo</string>
+    <string name="tpl_santa_desc">Sveglia Babbo Natale brillo con un secchio d’acqua, trova una renna per la slitta, carica i regali e consegnali dal camino.</string>
+    <string name="btn_use">Usa questo biglietto</string>
+    <string name="create_title">Crea il tuo biglietto</string>
+    <string name="hint_to">Nome del destinatario</string>
+    <string name="hint_from">Il tuo nome (mittente)</string>
+    <string name="hint_msg">Messaggio personale (facoltativo)</string>
+    <string name="lang_label">Lingua del biglietto</string>
+    <string name="btn_preview">Anteprima</string>
+    <string name="btn_share">Condividi il biglietto</string>
+    <string name="btn_copy">Copia il link</string>
+    <string name="copied">Link copiato</string>
+    <string name="share_chooser">Invia il biglietto tramite</string>
+</resources>
