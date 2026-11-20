@@ -106,7 +106,7 @@ button{font:inherit;color:#fff;cursor:pointer}
   <image href="assets/house_bg.webp" x="0" y="0" width="360" height="640" preserveAspectRatio="xMidYMid slice"/>
   <g transform="translate(-6 190)">
     <image id="sPuff" href="assets/santa_puff.webp" x="0" y="0" width="190" height="257"/>
-    <image id="sFlat" href="assets/santa_flat.webp" x="0" y="0" width="190" height="257" style="opacity:0"/>
+    <image id="sFlat" href="../shared/santa_flat.webp" x="0" y="0" width="190" height="257" style="opacity:0"/>
   </g>
   <g id="zzzG" transform="translate(95 208)"></g>
   <g transform="translate(300 566)"><g id="bucket"></g></g>
@@ -151,6 +151,7 @@ button{font:inherit;color:#fff;cursor:pointer}
       <div class="note" id="stNote"></div>
       <label><span id="lblTo"></span><input id="inTo" maxlength="30" autocomplete="off"></label>
       <label><span id="lblFrom"></span><input id="inFrom" maxlength="30" autocomplete="off"></label>
+      <label><span id="lblMsg"></span><input id="inMsg" maxlength="160" autocomplete="off"></label>
       <div class="langs"><select id="langSel" aria-label="Language"></select></div>
     </div>
     <button class="big" id="openBtn"></button>
@@ -178,7 +179,7 @@ var lang=WC.norm(q.get('lang'))||WC.norm(navigator.language)||'en';
 var nameTo=(q.get('to')||'').trim().slice(0,30);
 var nameFrom=(q.get('from')||'').trim().slice(0,30);
 var custom=(q.has('m')?WC.dec(q.get('m')):(q.get('msg')||'')).trim().slice(0,160);
-if(!hasParams){try{var sv=JSON.parse(localStorage.getItem('santaDemo')||'{}');nameTo=sv.to||'Lan';nameFrom=sv.from||'Minh';lang=WC.norm(sv.lang)||'vi'}catch(e){nameTo='Lan';nameFrom='Minh';lang='vi'}}
+if(!hasParams){try{var sv=JSON.parse(localStorage.getItem('santaDemo')||'{}');nameTo=sv.to||'Lan';nameFrom=sv.from||'Minh';custom=(sv.msg||'').slice(0,160);lang=WC.norm(sv.lang)||'vi'}catch(e){nameTo='Lan';nameFrom='Minh';lang='vi'}}
 if(!T[lang])lang='en';
 function fmt(s){var t=T[lang];return s.replace(/\{to\}/g,function(){return nameTo||t.anon}).replace(/\{from\}/g,function(){return nameFrom})}
 
@@ -322,11 +323,11 @@ function walker(parent,pre,fw,fh,sc,ms,seq,flip,stand){
 function buildTrain(p,full){
   var t=W(p),rd=W(t,{style:'opacity:'+(full?1:0)});
   var rw=walker(W(rd,{transform:'translate(108 10)'}),'rw',175,210,.53,200,[0,1],true,{href:'assets/reindeer_stand.webp',w:132});
-  el('image',{href:'assets/sleigh.webp',x:-65,y:-87,width:130,height:87},t);
+  el('image',{href:'../shared/sleigh.webp',x:-65,y:-87,width:130,height:87},t);
   var load=W(t,{style:'opacity:'+(full?1:0)});
   giftBox(load,14,-50,14,13,'#42a5f5','#fff');giftBox(load,30,-50,15,15,'#66bb6a','#ffd54a');giftBox(load,46,-50,13,12,'#ab47bc','#fff');
   var seat=W(t,{style:'opacity:'+(full?1:0)});
-  el('image',{href:'assets/santa_flat.webp',x:-48,y:-104,width:62,height:84},seat);
+  el('image',{href:'../shared/santa_flat.webp',x:-48,y:-104,width:62,height:84},seat);
   return {g:t,seat:seat,load:load,rd:rd,rw:rw}}
 
 var strip=$('strip'),cur=1,PN=7,aP=null;
@@ -361,7 +362,7 @@ function hs(p,n,x,y,w,h){return el('rect',{'data-h':n,class:'hs',x:x,y:y,width:w
   var p1=P[1];stallBg(p1);
   var in1=W(p1,{id:'sin1',transform:'translate(176 494)'});
   var bt1=W(in1,{id:'bt1'}),br1=W(bt1,{class:'breathe'});
-  el('image',{href:'assets/reindeer_drunk.webp',x:-135,y:-241,width:270,height:241},br1);
+  el('image',{href:'../shared/reindeer_drunk.webp',x:-135,y:-241,width:270,height:241},br1);
   hs(p1,'k1',50,300,250,200);stallDoor(p1,1);
   /* ---- 2: tuần lộc ham chơi (ảnh cô gái Noel) ---- */
   var p2=P[2];stallBg(p2);
@@ -380,7 +381,7 @@ function hs(p,n,x,y,w,h){return el('rect',{'data-h':n,class:'hs',x:x,y:y,width:w
   var p4=P[4];stallBg(p4);
   var r4=W(p4,{id:'r4',transform:'translate(176 494)'});
   var r4f=W(r4,{id:'r4f',transform:'scale(-1 1)'}),r4b=W(r4f,{class:'breathe'});
-  el('image',{href:'assets/reindeer_drunk.webp',x:-135,y:-241,width:270,height:241},r4b);
+  el('image',{href:'../shared/reindeer_drunk.webp',x:-135,y:-241,width:270,height:241},r4b);
   [0,1,2].forEach(function(k){var t=el('text',{x:92+k*14,y:332-k*22,fill:'#fff','font-size':18+k*5,'font-weight':800},p4);t.textContent='z';t.style.animation='zz 2s ease-in-out infinite';t.style.animationDelay=(k*.5)+'s'});
   hs(p4,'k4',50,300,250,200);stallDoor(p4,4);
   /* ---- 5: nghịch ngợm (trốn sau cỏ khô) ---- */
@@ -702,7 +703,7 @@ function renderStart(){
   }else{
     $('stFrom').textContent='';$('stTo').textContent='';
     $('stNote').textContent=t.note;$('lblTo').textContent=t.lblTo;$('lblFrom').textContent=t.lblFrom;
-    $('inTo').value=nameTo;$('inFrom').value=nameFrom;
+    $('inTo').value=nameTo;$('inFrom').value=nameFrom;$('lblMsg').textContent=t.lblMsg;$('inMsg').value=custom;
     $('langSel').value=lang;
   }
   document.documentElement.lang=lang;document.documentElement.dir='ltr';
@@ -710,9 +711,10 @@ function renderStart(){
 renderStart();
 $('inTo').addEventListener('input',function(){nameTo=this.value.trim().slice(0,30)});
 $('inFrom').addEventListener('input',function(){nameFrom=this.value.trim().slice(0,30)});
+$('inMsg').addEventListener('input',function(){custom=this.value.trim().slice(0,160)});
 (function(){var sel=$('langSel');WC.LANGS.forEach(function(L){var o=document.createElement('option');o.value=L;o.textContent=WC.NATIVE[L];sel.appendChild(o)});sel.value=lang;sel.addEventListener('change',function(){lang=this.value;renderStart()})})();
 $('openBtn').addEventListener('click',function(){
-  if(!hasParams){try{localStorage.setItem('santaDemo',JSON.stringify({to:nameTo,from:nameFrom,lang:lang}))}catch(e){}}
+  if(!hasParams){try{localStorage.setItem('santaDemo',JSON.stringify({to:nameTo,from:nameFrom,msg:custom,lang:lang}))}catch(e){}}
   initAudio();if(ac){try{ac.resume()}catch(e){}}
   chime(523);
   $('start').classList.add('hide');

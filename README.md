@@ -4,6 +4,7 @@ Thiệp điện tử động, tương tác: **người gửi** tạo thiệp b�
 
 ```
 docs/      Web (GitHub Pages): mỗi mẫu thiệp một thư mục, ví dụ docs/noel/
+           docs/shared/   Hình dùng chung giữa các mẫu (xe, tuần lộc, ông Noel, cây thông); mẫu gọi bằng ../shared/tên.webp
            docs/privacy/  Chính sách quyền riêng tư (dùng cho Google Play)
 android/   Dự án Android Studio (Java). Nhúng docs/ vào app để "Xem thử" chạy offline
 store/     Icon 512, feature graphic 1024x500, nội dung gợi ý cho trang Google Play
@@ -56,4 +57,9 @@ App đang dùng **ID TEST của AdMob**, an toàn để chạy thử.
 - Bản dịch nằm ở `design/i18n_src_a.py` (chung + Noel), `i18n_src_b.py` (Santa), `i18n_src_c.py` (giao diện app). Sửa xong chạy `python3 design/build_i18n.py` để sinh lại `docs/i18n.js`, `docs/*/texts.js`, `android/.../res/values*/strings.xml` và `Lang.java`. Đừng sửa tay các file sinh ra.
 - **Lời chúc riêng** trong link được mã hoá XOR + base64url (tham số `m`), khoá `w1nk-c4rd-2026` ở `LinkBuilder.java` và `docs/i18n.js`. Link cũ dùng `msg=` chữ thường vẫn đọc được. Đây chỉ là che mắt cho link không đọc ra chữ, không phải bảo mật.
 - **Nhóm thiệp** trong app: Giáng sinh, Sinh nhật, Đón năm mới (hai nhóm sau đang trống, hiện "sắp ra mắt"). Thêm mẫu mới ở `Templates.java`.
-- Mẫu hiện có: `noel` (Đêm Noel trong rừng) và `santa` (Ông già Noel say rượu), cả hai thuộc nhóm Giáng sinh.
+- Mẫu hiện có: `noel` (Đêm Noel trong rừng), `santa` (Ông già Noel say rượu), `catch` (Hứng quà ông già Noel thả)  `flappy` (Xe tuần lộc bay qua cây thông, kiểu Flappy Bird) `yuki` (Giáng sinh Nhật Bản, lật trang + tuyết rơi) và `korea` (Giáng sinh Hàn Quốc, chạm gọi 3 nhân vật) thuộc nhóm Giáng sinh, , `birthday` (Chọn hộp quà, thổi nến) và `nen` (Thổi nến đang cháy, lật trang) thuộc nhóm Sinh nhật, và `newyear` (Chạm đồng hồ điểm 12 giờ, pháo hoa) thuộc nhóm Năm mới. Cả chín đã đăng ký trong `Templates.java` của app Android (mẫu mới nào cũng phải đăng ký đủ). Màn Xem thử của app có banner AdMob dưới cùng (ID test).
+- Quy ước chung để mọi mẫu giống nhau (làm ở nhiều cửa sổ chat khác nhau): xem `design/QUY-UOC.md` (cũng là nội dung skill `winkcard-thiep`).
+
+
+## Cập nhật nhanh
+Trên máy đã clone repo: `./cap-nhat.sh ~/Downloads/thiep-dong.zip "Thêm thiệp mới"` (có zip) hoặc `./cap-nhat.sh "Sửa chữ"` (đã sửa trực tiếp). Lệnh này tự sinh bản dịch và danh sách thiệp Android, kiểm tra lỗi rồi commit + push. Danh sách thiệp nằm ở một chỗ: `design/cards.py`. Chi tiết: `design/QUY-UOC.md`.

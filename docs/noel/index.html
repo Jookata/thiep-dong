@@ -96,7 +96,7 @@ button{font:inherit;color:#fff;cursor:pointer}
 <g id="stars"></g>
 
 <g id="tree">
-  <image href="assets/tree.webp" x="171" y="244.3" width="190" height="285.7"/>
+  <image href="../shared/tree.webp" x="171" y="244.3" width="190" height="285.7"/>
   <g id="lights"></g>
 </g>
 
@@ -135,7 +135,7 @@ button{font:inherit;color:#fff;cursor:pointer}
 <g transform="translate(262 504)"><g id="cat1P" style="opacity:0"><g id="cat1R"><image href="assets/cat1.webp" x="-8.5" y="-17.3" width="17" height="17.3"/></g></g></g>
 <!-- mảnh cành thông phía trước che mèo (cắt từ chính ảnh cây) -->
 <clipPath id="tfClip"><rect x="171" y="499.6" width="190" height="31"/></clipPath>
-<g id="treeFront" style="opacity:0" clip-path="url(#tfClip)"><image href="assets/tree.webp" x="171" y="244.3" width="190" height="285.7"/></g>
+<g id="treeFront" style="opacity:0" clip-path="url(#tfClip)"><image href="../shared/tree.webp" x="171" y="244.3" width="190" height="285.7"/></g>
 <!-- mèo 2: nằm, tay khều vòng cổ -->
 <g transform="translate(196 511.7) scale(.0713)"><g id="cat2P" style="opacity:0">
   <image href="assets/cat2_body.webp" x="0" y="0" width="617" height="397"/>
@@ -177,6 +177,7 @@ button{font:inherit;color:#fff;cursor:pointer}
       <div class="note" id="stNote"></div>
       <label><span id="lblTo"></span><input id="inTo" maxlength="30" autocomplete="off"></label>
       <label><span id="lblFrom"></span><input id="inFrom" maxlength="30" autocomplete="off"></label>
+      <label><span id="lblMsg"></span><input id="inMsg" maxlength="160" autocomplete="off"></label>
       <div class="langs"><select id="langSel" aria-label="Language"></select></div>
     </div>
     <button class="big" id="openBtn"></button>
@@ -205,7 +206,7 @@ var lang=WC.norm(q.get('lang'))||WC.norm(navigator.language)||'en';
 var nameTo=(q.get('to')||'').trim().slice(0,30);
 var nameFrom=(q.get('from')||'').trim().slice(0,30);
 var custom=(q.has('m')?WC.dec(q.get('m')):(q.get('msg')||'')).trim().slice(0,160);
-if(!hasParams){try{var sv=JSON.parse(localStorage.getItem('noelDemo')||'{}');nameTo=sv.to||'Lan';nameFrom=sv.from||'Minh';lang=WC.norm(sv.lang)||'vi'}catch(e){nameTo='Lan';nameFrom='Minh';lang='vi'}}
+if(!hasParams){try{var sv=JSON.parse(localStorage.getItem('noelDemo')||'{}');nameTo=sv.to||'Lan';nameFrom=sv.from||'Minh';custom=(sv.msg||'').slice(0,160);lang=WC.norm(sv.lang)||'vi'}catch(e){nameTo='Lan';nameFrom='Minh';lang='vi'}}
 if(!T[lang])lang='en';
 function fmt(s){var t=T[lang];return s.replace(/\{to\}/g,function(){return nameTo||t.anon}).replace(/\{from\}/g,function(){return nameFrom})}
 
@@ -512,7 +513,7 @@ $('replay').addEventListener('click',function(){location.reload()});
 /* ================= START SCREEN ================= */
 function renderStart(){
   var t=T[lang];
-  $('stTitle').textContent=t.title;
+  $('stTitle').textContent=(nameTo&&t.titleTo)?fmt(t.titleTo):t.title;
   $('openBtn').textContent=t.open;
   $('demo').style.display=hasParams?'none':'block';
   if(hasParams){
@@ -521,7 +522,7 @@ function renderStart(){
   }else{
     $('stFrom').textContent='';$('stTo').textContent='';
     $('stNote').textContent=t.note;$('lblTo').textContent=t.lblTo;$('lblFrom').textContent=t.lblFrom;
-    $('inTo').value=nameTo;$('inFrom').value=nameFrom;
+    $('inTo').value=nameTo;$('inFrom').value=nameFrom;$('lblMsg').textContent=t.lblMsg;$('inMsg').value=custom;
     $('langSel').value=lang;
   }
   document.documentElement.lang=lang;document.documentElement.dir='ltr';
@@ -529,9 +530,10 @@ function renderStart(){
 renderStart();
 $('inTo').addEventListener('input',function(){nameTo=this.value.trim().slice(0,30)});
 $('inFrom').addEventListener('input',function(){nameFrom=this.value.trim().slice(0,30)});
+$('inMsg').addEventListener('input',function(){custom=this.value.trim().slice(0,160)});
 (function(){var sel=$('langSel');WC.LANGS.forEach(function(L){var o=document.createElement('option');o.value=L;o.textContent=WC.NATIVE[L];sel.appendChild(o)});sel.value=lang;sel.addEventListener('change',function(){lang=this.value;renderStart()})})();
 $('openBtn').addEventListener('click',function(){
-  if(!hasParams){try{localStorage.setItem('noelDemo',JSON.stringify({to:nameTo,from:nameFrom,lang:lang}))}catch(e){}}
+  if(!hasParams){try{localStorage.setItem('noelDemo',JSON.stringify({to:nameTo,from:nameFrom,msg:custom,lang:lang}))}catch(e){}}
   initAudio();if(ac){try{ac.resume()}catch(e){}}
   chime(523);
   $('start').classList.add('hide');

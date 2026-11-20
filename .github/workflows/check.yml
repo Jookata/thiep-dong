@@ -1,0 +1,17 @@
+name: Kiểm tra thiệp
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.x' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Sinh lại file tự động rồi so với bản đã đẩy
+        run: |
+          python3 design/build_i18n.py
+          git diff --exit-code || (echo "File sinh tự động chưa cập nhật: chạy ./cap-nhat.sh" && exit 1)
+      - name: Kiểm tra từng thiệp
+        run: python3 design/check.py

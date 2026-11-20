@@ -21,6 +21,11 @@ COMMON={
 'th':['เพื่อน','จาก: {from}','ถึง: {to}','เปิดการ์ด','ชื่อผู้รับ','ชื่อผู้ส่ง','โหมดทดลอง: พิมพ์ชื่อเพื่อดูตัวอย่าง','หนาวจัง…','เริ่มอุ่นขึ้นแล้ว','ร้อนแล้ว!','ด้วยรัก, {from}','ดูอีกครั้ง','ดาวน์โหลด WinkCard ได้ที่'],
 'ms':['kawan','Daripada: {from}','Kepada: {to}','Buka kad','Nama penerima','Nama pengirim','Mod demo: taip nama untuk pratonton','Sejuk…','Semakin hangat','Panas!','Dengan kasih, {from}','Tonton semula','Muat turun WinkCard di'],
 }
+
+# Nhãn ô "lời chúc riêng" ở chế độ thử (thêm sau; nối vào CK/COMMON)
+LBLMSG={'vi':'Lời chúc riêng (không bắt buộc)','en':'Your message (optional)','fr':'Votre message (facultatif)','de':'Deine Nachricht (optional)','it':'Il tuo messaggio (facoltativo)','pl':'Twoje życzenia (opcjonalnie)','fi':'Oma viestisi (valinnainen)','es':'Tu mensaje (opcional)','pt':'Sua mensagem (opcional)','sk':'Tvoj odkaz (voliteľné)','ko':'나만의 메시지 (선택)','ja':'メッセージ（任意）','zh':'祝福语（可选）','zh-TW':'祝福語（可選）','th':'ข้อความอวยพร (ไม่บังคับ)','ms':'Mesej anda (pilihan)'}
+CK.append('lblMsg')
+for _L in LANGS: COMMON[_L].append(LBLMSG[_L])
 NK=['title','fin','s0','s1','s2','s2tree','s2dog','s3b','s3','s4']
 NOEL={
 'vi':['Bạn có một tấm thiệp Noel','Giáng sinh an lành, {to}!','Chào {to}! Đêm Noel lạnh quá, nhà tối om không một ánh đèn. Bạn chạm vào cửa nhà nhé!','Sáng đèn rồi! Nhưng ống khói vẫn lạnh tanh. Đố {to}: thứ gì xếp thành chồng cạnh nhà có thể làm nên lửa ấm?','Khói bốc lên rồi, ấm hẳn! Đố {to}: giữa tuyết trắng có một bạn bé xíu, đứng một mình mà vẫn xanh. Bạn ấy đang ở đâu nhỉ?','Giỏi quá {to}! Cây lớn rồi. Mà hình như ở góc kia có ai đang nghịch tuyết…','Ôi, một chú chó nghịch ngợm! Còn bạn bé xíu xanh giữa tuyết, {to} tìm thấy chưa?','Cây lung linh quá! Mà hình như ở góc kia có ai đang nghịch tuyết…','Cây lớn rồi! Giờ thứ gì sáng nhất trên cao có thể xuống làm đẹp cho cây?','Chú chó ngoan quá {to}! Nhưng Noel mà thiếu thứ trắng, mềm, từ trời rơi xuống thì chưa phải Noel. Hỏi thử bầu trời xem!'],
